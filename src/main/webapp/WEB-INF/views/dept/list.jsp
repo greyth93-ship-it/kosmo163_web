@@ -16,13 +16,16 @@
 				<tr>
 					<th>DEPARTMENT_ID</th>
 					<th>DEPARTMENT_NAME</th>
+					<th>MANAGER_ID</th>
+					<th>LOCATION_ID</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${list}" var="d">
 					<tr>
 						<td>${d.departmentId}</td>
-						<td>${d.departmentName}</td>
+						<td><a href="/dept/detail?departmentId=${d.departmentId}">${d.departmentName}</a></td>
+						
 					</tr>
 					<!-- 
 					getter의 이름 : getter 메서드에서

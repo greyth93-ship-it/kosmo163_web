@@ -14,7 +14,7 @@ public class CountriesDAO {
 	
 	
 	
-	public void detail (String countryName) throws Exception {
+	public CountryDTO detail (String countryName) throws Exception {
 		DBConnection connection = new DBConnection();
 		Connection con = connection.getConnection();
 		
@@ -28,18 +28,19 @@ public class CountriesDAO {
 		ps.setString(1, countryName);
 		
 		ResultSet rs = ps.executeQuery();
-		
+		CountryDTO dto = null;
 		if (rs.next()) {
-			String name = rs.getString("COUNTRY_NAME");
-			System.out.println(name);
-		} else {
-			System.out.println("나라가 없다");
-		}
+			dto = new CountryDTO();
+			dto.setCountryId(rs.getString("COUNTRY_ID"));
+			dto.setCountryName(rs.getString("COUNTRY_NAME"));
+			dto.setRegionId(rs.getInt("REGION_ID"));
+		} 
 		
 		rs.close();
 		ps.close();
 		con.close();
 
+		return dto;
 				
 	}
 
