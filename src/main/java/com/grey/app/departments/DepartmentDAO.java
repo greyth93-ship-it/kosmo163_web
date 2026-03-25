@@ -7,15 +7,56 @@ import java.sql.ResultSet;
 import com.grey.app.util.DBConnection;
 
 public class DepartmentDAO {
+	
+	private DBConnection connection;
+	
+	public DepartmentDAO() {
+		this.connection = new DBConnection();
+	}
+	
+	public void detail(int departmentId) throws Exception {
+		
+		Connection con = connection.getConnection();
+		
+		String sql = """
+				SELECT * FROM DEPARTMENTS
+				WHERE DEPARTMENT_ID = ?
+				""";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		// ? 세팅
+		st.setInt(1, departmentId);
+		
+		ResultSet rs = st.executeQuery();
+		
+		if (rs.next()) {
+			String name = rs.getString("DEPARTMENT_NAME");
+			System.out.println(name);
+		} else {
+			System.out.println("부서가 없다");
+		}
+		rs.close();
+		st.close();
+		con.close();
+		
+	}
+	
+	
+	
+	
 
 	public void list() throws Exception {
 		// 1. DB연결
-		DBConnection connection = new DBConnection();
+		
 		Connection con = connection.getConnection();
 		
 		// 2. 쿼리문 작성
-		String sql = "SELECT * FROM DEPARTMENTS";
-		
+		String sql = """
+				SELECT * FROM DEPARTMENTS
+				ORDER BY DEPARTMENT_ID DESC
+				""";
+				
 		// 3. 쿼리문 미리 전송
 		PreparedStatement st = con.prepareStatement(sql);
 		
