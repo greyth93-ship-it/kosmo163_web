@@ -4,12 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.print.DocFlavor.STRING;
 
 import com.grey.app.util.DBConnection;
 
 public class CountriesDAO {
+	
+	
 	
 	public void detail (String countryName) throws Exception {
 		DBConnection connection = new DBConnection();
@@ -40,7 +43,9 @@ public class CountriesDAO {
 				
 	}
 
-	public void list() throws Exception {
+	public ArrayList<CountryDTO> list() throws Exception {
+		
+		
 		
 		// DB 연결
 		DBConnection connection = new DBConnection();
@@ -55,11 +60,20 @@ public class CountriesDAO {
 		// 쿼리문 전송
 		ResultSet rs = ps.executeQuery();
 		
+		ArrayList<CountryDTO> ar = new ArrayList<>();
 		while (rs.next()) {
+			CountryDTO dto = new CountryDTO();
 			String id = rs.getString("COUNTRY_ID");
-			String name = rs.getString("COUNTRY_name");
-			int ri = rs.getInt("REGIOM_ID");
-			System.out.println(id);
+			String name = rs.getString("COUNTRY_NAME");
+			int ri = rs.getInt("REGION_ID");
+			
+			dto.setCountryId(id);
+			dto.setCountryName(name);
+			dto.setRegionId(ri);
+			
+			ar.add(dto);
+			
+			
 		} 
 		
 		// 종료
@@ -67,6 +81,7 @@ public class CountriesDAO {
 		ps.close();
 		con.close();
 		
+		return ar;
 		
 	}
 }
