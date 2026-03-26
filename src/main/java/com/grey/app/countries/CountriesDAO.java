@@ -12,10 +12,35 @@ import com.grey.app.util.DBConnection;
 
 public class CountriesDAO {
 	
+	private DBConnection connection;
+	public CountriesDAO () {
+		this.connection = new DBConnection();
+	}
+		
+	public int create (CountryDTO dto) throws Exception {
+		Connection con = connection.getConnection();
+		
+		String sql = """
+				INSERT INTO COUNTRIES 
+				VALUES (?, ?, ?)
+				""";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, dto.getCountryId());
+		ps.setString(2, dto.getCountryName());
+		ps.setInt(3, dto.getRegionId());
+		
+		int result = ps.executeUpdate();
+		
+		ps.close();
+		con.close();
+		
+		return result;
+	}
 	
 	
 	public CountryDTO detail (String countryName) throws Exception {
-		DBConnection connection = new DBConnection();
 		Connection con = connection.getConnection();
 		
 		String sql = """
@@ -34,7 +59,7 @@ public class CountriesDAO {
 			dto.setCountryId(rs.getString("COUNTRY_ID"));
 			dto.setCountryName(rs.getString("COUNTRY_NAME"));
 			dto.setRegionId(rs.getInt("REGION_ID"));
-		} 
+			} 
 		
 		rs.close();
 		ps.close();
@@ -45,11 +70,7 @@ public class CountriesDAO {
 	}
 
 	public ArrayList<CountryDTO> list() throws Exception {
-		
-		
-		
 		// DB 연결
-		DBConnection connection = new DBConnection();
 		Connection con = connection.getConnection();
 		
 		// 쿼리문 작성
@@ -74,8 +95,7 @@ public class CountriesDAO {
 			
 			ar.add(dto);
 			
-			
-		} 
+			} 
 		
 		// 종료
 		rs.close();

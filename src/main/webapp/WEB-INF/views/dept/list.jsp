@@ -11,6 +11,10 @@
 	<h2>부서 리스트</h2>
 	
 	<div>
+		<a href="./create">부서등록</a>
+	</div>
+	
+	<div>
 		<table>
 			<thead>
 				<tr>
@@ -24,7 +28,7 @@
 				<c:forEach items="${list}" var="d">
 					<tr>
 						<td>${d.departmentId}</td>
-						<td><a href="/dept/detail?departmentId=${d.departmentId}">${d.departmentName}</a></td>
+						<td><a href="./detail?departmentId=${d.departmentId}">${d.departmentName}</a></td>
 						
 					</tr>
 					<!-- 
