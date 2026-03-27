@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.print.DocFlavor.STRING;
 
+import com.grey.app.departments.DepartmentDTO;
 import com.grey.app.util.DBConnection;
 
 public class CountriesDAO {
@@ -15,6 +16,25 @@ public class CountriesDAO {
 	private DBConnection connection;
 	public CountriesDAO () {
 		this.connection = new DBConnection();
+	}
+	
+	public int delete (CountryDTO dto) throws Exception {
+		Connection con = connection.getConnection();
+		
+		String sql = """
+				DELETE COUNTRIES WHERE COUNTRY_ID=?
+				""";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, dto.getCountryId());
+		
+		int result = ps.executeUpdate();
+		
+		ps.close();
+		con.close();
+		
+		return result;
+		
 	}
 		
 	public int create (CountryDTO dto) throws Exception {

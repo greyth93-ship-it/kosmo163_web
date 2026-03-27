@@ -12,6 +12,7 @@
 	
 	<div>
 		<a href="./create">부서등록</a>
+		
 	</div>
 	
 	<div>
