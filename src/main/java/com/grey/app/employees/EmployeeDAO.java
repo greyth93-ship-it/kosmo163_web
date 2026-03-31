@@ -14,6 +14,41 @@ public class EmployeeDAO {
 		this.connection = new DBConnection();
 	}
 	
+	// 로그인 검증
+	public EmployeeDTO login(EmployeeDTO dto) throws Exception {
+		
+		Connection con = connection.getConnection();
+		
+		String sql = """
+				SELECT * FROM EMPLOYEES
+				WHERE EMPLOYEE_ID = ? AND PASSWORD =?
+				""";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, dto.getEmployeeId());
+		ps.setString(2, dto.getPassword());
+		
+		ResultSet rs = ps.executeQuery();
+		
+		if (rs.next()) {
+			dto.setFirstName(rs.getString("FIRST_NAME"));
+			dto.setLastName(rs.getString("LAST_NAME"));
+			dto.setHireDate(rs.getDate("HIRE_DATE"));
+			dto.setSalary(rs.getDouble("SALARY"));
+			dto.setDepartmentId(rs.getInt("DEPARTMENT_ID"));
+			
+			return dto;
+		} 
+		
+		return null;
+		
+	}
+	
+	
+	
+	
+	
 	public void detail (int employeeId) throws Exception {
 		
 		Connection con = connection.getConnection();
