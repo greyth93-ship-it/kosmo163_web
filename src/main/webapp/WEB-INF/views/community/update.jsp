@@ -7,14 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>Detail Page</h2>
-	
-	<h4>${dto.title}</h4>
-	<h4>${dto.contents}</h4>
-	
-	<a href="./update?title=${dto.title}">수정</a>
-	
-	
 
 </body>
 </html>

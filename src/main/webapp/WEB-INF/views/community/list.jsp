@@ -10,6 +10,9 @@
 <body>
 	<h2>목록 리스트</h2>
 	<div>
+		<a href="./create">부서등록</a>
+	</div>
+	<div>
 		<table>
 			<thead>
 				<tr>
@@ -23,7 +26,7 @@
 			<tbody>
 				<c:forEach items="${list}" var="d">
 					<tr>
-						<td><a href="./detail?num=${d.num}">${d.num}</a></td>
+						<td><a href="./detail?num=${d.num}">${d.title}</a></td>
 						<td>${d.title}</td>
 						<td>${d.name}</td>
 						<td>${d.createTime}</td>
