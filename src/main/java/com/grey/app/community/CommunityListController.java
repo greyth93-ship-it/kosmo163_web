@@ -1,4 +1,4 @@
-package com.grey.app.countries;
+package com.grey.app.community;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -10,16 +10,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Servlet implementation class CountryController
+ * Servlet implementation class CommunityListController
  */
-@WebServlet("/country/list")
-public class CountryController extends HttpServlet {
+@WebServlet("/comm/list")
+public class CommunityListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CountryController() {
+    public CommunityListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,16 +28,19 @@ public class CountryController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CountriesDAO dao = new CountriesDAO();
+		CommunityDAO dao = new CommunityDAO();
 		try {
-			ArrayList<CountryDTO> ar = dao.list();
+			ArrayList<CommunityDTO> ar = dao.list();
 			request.setAttribute("list", ar);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/country/list.jsp");
+		
+		
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/community/list.jsp");
 		view.forward(request, response);
+		
 		
 	}
 

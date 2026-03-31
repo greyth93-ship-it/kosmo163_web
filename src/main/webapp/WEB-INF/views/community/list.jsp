@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>목록 리스트</h2>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>NUM</th>
+					<th>TITLE</th>
+					<th>NAME</th>
+					<th>CREATE TIME</th>
+					<th>STAR</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${list}" var="d">
+					<tr>
+						<td><a href="./detail?num=${d.num}">${d.num}</a></td>
+						<td>${d.title}</td>
+						<td>${d.name}</td>
+						<td>${d.createTime}</td>
+						<td>${d.star}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

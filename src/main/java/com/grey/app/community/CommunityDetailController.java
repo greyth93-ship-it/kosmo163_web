@@ -1,4 +1,4 @@
-package com.grey.app.departments;
+package com.grey.app.community;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -7,20 +7,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 
 /**
- * Servlet implementation class DepartmentController
+ * Servlet implementation class CommunityDetailController
  */
-@WebServlet("/dept/list")
-public class DepartmentController extends HttpServlet {
+@WebServlet("/comm/detail")
+public class CommunityDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DepartmentController() {
+    public CommunityDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,25 +27,28 @@ public class DepartmentController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		CommunityDAO dao = new CommunityDAO();
+		String num = request.getParameter("num");
+		int n = Integer.parseInt(num);
 		
-//		System.out.println(request.getMethod());
-//		System.out.println(request.getRemoteAddr());
-//		System.out.println(request.getRequestURL());
-		
-		
-		
-		DepartmentDAO dao = new DepartmentDAO();
 		
 		try {
-			ArrayList<DepartmentDTO> ar = dao.list();
-			request.setAttribute("list", ar);
+			CommunityDTO dto = dao.detail(n);
+			
+			request.setAttribute("dto", dto);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		RequestDispatcher list = request.getRequestDispatcher("/WEB-INF/views/dept/list.jsp");
-		list.forward(request, response);
+		
+		
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/community/detail.jsp");
+	
+		view.forward(request, response);
+		
+		
 	}
 
 	/**
