@@ -10,7 +10,7 @@
 <body>
 	<h2>목록 리스트</h2>
 	<div>
-		<a href="./create">부서등록</a>
+		<a href="./create">등록</a>
 	</div>
 	<div>
 		<table>

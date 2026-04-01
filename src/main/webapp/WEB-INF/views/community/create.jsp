@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h2>등록 페이지</h2>
+	<Form>
+		<div>
+			<input >
+		</div>
+	</Form>
 </body>
 </html>
